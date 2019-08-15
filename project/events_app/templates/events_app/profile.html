@@ -1,0 +1,37 @@
+{% extends 'events_app/base.html' %}
+
+{% block content %}
+    <h1>Profile</h1>
+
+    {% if message %}
+        <div class="alert alert-info" role="alert">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <div class="container">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-md-6 form-group text-center">
+                    <a href="profile/create_event" class="btn btn-primary btn-lg" role="button">Create event</a>
+                </div>
+                <div class="col-md-6 form-group text-center">
+                    <a href="log_out" class="btn btn-secondary btn-lg" role="button">Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <ul class="list-group">
+        {% for event in events %}
+            <li class="list-group-item">
+                Name: {{ event.name }}
+                <br>
+                Created at: {{ event.created_at }}
+                <br>
+                <a href="{% url 'events_app:edit' event.id %}" class="btn btn-secondary btn-lg">View or Edit</a>
+                <a href="{% url 'events_app:delete' event.id %}" class="btn btn-secondary btn-lg">Delete</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
